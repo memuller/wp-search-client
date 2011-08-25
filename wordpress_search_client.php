@@ -31,7 +31,6 @@ function wpsearch_publish_post($post_id){
   update_option('wpsearch', $post->post_title) ;
 }
 
-
 add_action('publish_post', 'wpsearch_publish_post', 10, 1) ;
 
 
