@@ -26,9 +26,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
+require_once('vendors/pest/Pest.php') ;
+require_once('models/Post.php');
+
+
 function wpsearch_publish_post($post_id){
-  $post = get_post($post_id) ;
-  update_option('wpsearch', $post->post_title) ;
+  $post = new SearchCN\Document($post_id) ;
 }
 
 add_action('publish_post', 'wpsearch_publish_post', 10, 1) ;
