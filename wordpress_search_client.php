@@ -28,14 +28,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 require_once('vendors/pest/Pest.php') ;
+#require_once('vendors/haml/HamlParser.class.php') ;
 require_once('models/Post.php');
+require_once('presenters/Options.php');
 
+define(SearchCNViewsPath, ABSPATH.'wp-content/plugins/wp-search-client/views/');
 
-function wpsearch_publish_post($post_id){
+// Hook when posts are published, calling new Document($post_id) .
+function wpsearchcli_publish_post($post_id){
   $post = new SearchCN\Document($post_id) ;
 }
+add_action('publish_post', 'wpsearchcli_publish_post', 10, 1) ;
 
-add_action('publish_post', 'wpsearch_publish_post', 10, 1) ;
+// Adds an admin page, calling OptionsPresenter::present() .
+function wpsearchcli_options_menu(){
+	add_submenu_page( 'options-general.php', 'Indexing Options', 'Indexing', 'edit_posts', __FILE__  , 'SearchCN\OptionsPresenter::present'  );
+}
+add_action( 'admin_menu', 'wpsearchcli_options_menu' ) ;
 
 
 ?>

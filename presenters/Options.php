@@ -1,0 +1,41 @@
+<?php 
+	namespace SearchCN ;
+
+	class OptionsPresenter {
+		
+		// "routes" stuff to their appropriate function.
+		static function present(){
+			if (isset($_POST['submit'])) {
+				self::post() ; 
+			} else {
+				self::index() ;
+			}
+		}
+
+		// form post, updating options.
+		static function post(){
+			update_option('searchcn_indexer_url', $_POST['indexer_url']) ;
+			self::index();
+		}
+
+		// prints the options page
+		static function index(){
+			$indexer_url = get_option('searchcn_indexer_url') ;
+
+			$flash = self::handle_flash_messages() ;
+
+			require_once SearchCNViewsPath . 'options.php' ;
+		}
+
+		// == Helper methods.
+		// sets an array with information to be used when printing flash messages.
+		static function handle_flash_messages(){
+			if (isset($_POST['submit'])) {
+				return array( 'type' => 'updated', 'text' => __('Options Saved.') ) ;
+			} else {
+				return false ;
+			}
+		}
+	}
+
+ ?>

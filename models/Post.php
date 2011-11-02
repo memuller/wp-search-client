@@ -3,14 +3,14 @@
 	use Pest as Pest ;
 	class Document {
 
-		const server_addr = "http://fedora:3000" ;
 		public $post ; 
 		private $client ; 
 
 		function __construct($id) {
 			$this->post = get_post($id) ;
-			if ($this->is_indexable()) {				
-				$this->index();
+			if ($this->is_indexable()) {
+				$this->build_client();
+				$this->post();
 			}
 		}
 
@@ -19,7 +19,7 @@
 		}
 
 		private function build_client(){
-			$this->client = new Pest(self::server_addr) ;
+			$this->client = new Pest(get_option('searchcn_indexer_url')) ;
 		}
 
 		private function build_post_arguments(){
@@ -30,15 +30,14 @@
 			 return $arguments ; 
 		}
 
-		private function index(){
-			$this->build_client();
+		private function post(){
 			$result = $this->client->post( 
 				'/documents', $this->build_post_arguments() );
 			$this->debug($result);
 		}
 
 		private function debug($message){
-			update_option('search_debug', $message);
+			update_option('searchcn_debug', $message);
 		}
 	}
  ?>
