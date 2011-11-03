@@ -14,6 +14,7 @@
 
 		// form post, updating options.
 		static function post(){
+			check_admin_referer('searchcn_update_options') ;
 			update_option('searchcn_indexer_url', $_POST['indexer_url']) ;
 			self::index();
 		}
