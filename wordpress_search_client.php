@@ -30,6 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 require_once('vendors/pest/Pest.php') ;
 #require_once('vendors/haml/HamlParser.class.php') ;
 require_once('models/Post.php');
+require_once('models/BatchIndexer.php');
 require_once('presenters/Options.php');
 
 define(SearchCNViewsPath, ABSPATH.'wp-content/plugins/wp-search-client/views/');

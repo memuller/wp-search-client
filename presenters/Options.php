@@ -17,7 +17,7 @@
 			check_admin_referer('searchcn_update_options') ;
 
 			if ($_POST['reindex_all_sites']) {
-				
+				new BatchIndexer() ;
 			}
 			update_site_option('searchcn_indexer_url', $_POST['indexer_url']) ;
 			self::index();
