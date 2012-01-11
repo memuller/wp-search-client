@@ -3,12 +3,14 @@
 	use Pest as Pest ;
 	class Document {
 
-		public $post ; 
+		public $post, $author, $id ; 
 		private $client ; 
 
 		function __construct($id) {
+			$this->id = $id ;
 			$this->post = get_post($id) ;
 			if ($this->is_indexable()) {
+				$this->author = get_userdata($this->post->post_author);
 				$this->build_client();
 				$this->post();
 			}
@@ -23,9 +25,13 @@
 		}
 
 		private function build_post_arguments(){
-			$arguments = array('document[title]' => $this->post->post_title,
+			$arguments = array(
+				'document[title]' => $this->post->post_title,
 				'document[uri]' => get_permalink($this->id),
-				'document[exerpt]' => $this->post->post_excerpt
+				'document[exerpt]' => $this->post->post_excerpt,
+				'document[content]' => $this->post->post_content,
+				'document[author_email]' => $this->author->user_email,
+				'document[author_name]' => $this->author->display_name
 			 );
 			 return $arguments ; 
 		}
@@ -33,7 +39,6 @@
 		private function post(){
 			$result = $this->client->post( 
 				'/documents', $this->build_post_arguments() );
-			$this->debug($result);
 		}
 
 		private function debug($message){
