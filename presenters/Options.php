@@ -15,6 +15,10 @@
 		// form post, updating options.
 		static function post(){
 			check_admin_referer('searchcn_update_options') ;
+
+			if ($_POST['reindex_all_sites']) {
+				
+			}
 			update_site_option('searchcn_indexer_url', $_POST['indexer_url']) ;
 			self::index();
 		}
@@ -32,6 +36,10 @@
 		// sets an array with information to be used when printing flash messages.
 		static function handle_flash_messages(){
 			if (isset($_POST['submit'])) {
+				if (isset($_POST['reindex_all_sites'])) {
+					return array( 'type' => 'updated', 'text' => __('Reindexing of all sites is underway.') ) ;
+				}
+
 				return array( 'type' => 'updated', 'text' => __('Options Saved.') ) ;
 			} else {
 				return false ;

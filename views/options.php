@@ -17,6 +17,7 @@
 	<form action="" method="post" id="searchcn_conf">
 		<table class="form-table">
 			<tbody>
+				
 				<tr valign="top">
 					<th scope="row"><label for="indexer_url"> <?php _e("Indexer URL") ?> </label></th>
 					<td>
@@ -28,9 +29,25 @@
 						</span>
 					</td>
 				</tr>
+
+				<tr valign="top">
+					<th scope="row"><label for="reindex_all_sites"> <?php _e("Schedule Re-index") ?> </label></th>
+					<td>
+						<input name="reindex_all_sites" type="checkbox" id="reindex_all_sites" class="regular-text code" 
+							value="reindex_all_sites" > <?php _e("Re-index all posts from all sites on this network.") ?>
+						<br/>
+						<span class="description"> 
+							<?php _e("this may take a while, depending on the size of your network.") ?><br/>
+							<?php _e("during this time, your sites may experience slowdown or unreability on your sites.") ?><br/>
+							<?php _e("please discuss this proccess with your hosting provider beforehand.") ?>
+						</span>
+					</td>
+				</tr>
+
 			</tbody>
 		</table>
 		<?php wp_nonce_field('searchcn_update_options') ?>
+		
 		<p class="submit">
 			<input type="submit" name="submit" id="submit" class="button-primary" 
 				value="<?php _e("Save Changes")?>">
