@@ -15,13 +15,13 @@
 		// form post, updating options.
 		static function post(){
 			check_admin_referer('searchcn_update_options') ;
-			update_option('searchcn_indexer_url', $_POST['indexer_url']) ;
+			update_site_option('searchcn_indexer_url', $_POST['indexer_url']) ;
 			self::index();
 		}
 
 		// prints the options page
 		static function index(){
-			$indexer_url = get_option('searchcn_indexer_url') ;
+			$indexer_url = get_site_option('searchcn_indexer_url') ;
 
 			$flash = self::handle_flash_messages() ;
 

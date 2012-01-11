@@ -19,7 +19,7 @@
 		}
 
 		private function build_client(){
-			$this->client = new Pest(get_option('searchcn_indexer_url')) ;
+			$this->client = new Pest(get_site_option('searchcn_indexer_url')) ;
 		}
 
 		private function build_post_arguments(){

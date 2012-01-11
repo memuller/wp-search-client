@@ -42,9 +42,9 @@ add_action('publish_post', 'wpsearchcli_publish_post', 10, 1) ;
 
 // Adds an admin page, calling OptionsPresenter::present() .
 function wpsearchcli_options_menu(){
-	add_submenu_page( 'options-general.php', 'Indexing Options', 'Indexing', 'edit_posts', __FILE__  , 'SearchCN\OptionsPresenter::present'  );
+	add_submenu_page( 'settings.php', 'Indexing Settings', 'Indexing', 'manage_network', 'indexing', 'SearchCN\OptionsPresenter::present'  );
 }
-add_action( 'admin_menu', 'wpsearchcli_options_menu' ) ;
+add_action( 'network_admin_menu', 'wpsearchcli_options_menu' ) ;
 
 
 ?>
