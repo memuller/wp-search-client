@@ -1,16 +1,16 @@
-<?php 
+<?php
 	namespace SearchCN ;
-	
+
 	class BatchIndexer {
 
-		public $post, $author ; 
-		private $client ; 
+		public $post, $author ;
+		private $client ;
 
 		function __construct($id='all') {
 			global $wpdb ;
 			if ($id == 'all') {
-				$blogs = $wpdb->get_col("select blog_id from $wpdb->prefix where public = 1 and archived = 0");
-				foreach ($blogs as $blog) {
+            	$blogs = $wpdb->get_col("select blog_id from wp_blogs where public = '1' and archived = '0'");
+				foreach ($blogs as $i => $blog) {
 					new BatchIndexer($blog) ;
 				}
 			} else {
